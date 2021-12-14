@@ -34,7 +34,7 @@
         :unavailable-date="unavailableDate"
         :date="date"
         :selected-month.sync="selectedMonth"
-        :selectedYear.sync="selectedYear"
+        :selected-year.sync="selectedYear"
       />
     </div>
   </div>
