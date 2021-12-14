@@ -6,7 +6,9 @@
           {{ price }} zł
         </div>
         <div class="rating">
-          <span class="stars">{{ stars }}</span>
+          <Stars
+            :stars="stars"
+          />
           <span class="voice">{{ voice }}</span>
         </div>
       </div>
@@ -22,8 +24,13 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import Stars from './Stars.vue'
 
-@Component
+@Component({
+  components: {
+    Stars,
+  },
+})
 export default class ReservationInfo extends Vue {
   @Prop() price!: number
 
@@ -42,7 +49,7 @@ export default class ReservationInfo extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .container {
-    width: 300px;
+    width: 400px;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
     padding: 20px 20px;
@@ -52,9 +59,9 @@ export default class ReservationInfo extends Vue {
     margin-bottom: 15px;
   } 
   .price {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -65,7 +72,7 @@ export default class ReservationInfo extends Vue {
     align-items: center;
   }
   .voice {
-    font-size: 16px;
+    font-size: 12px;
     color: gray;
     font-weight: bold;
   }
