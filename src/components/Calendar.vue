@@ -4,12 +4,16 @@
       <div class="date-label">
         <span
           class="change-month"
+          @click="previous()"
         >
           <img class="back-icon" src="@/assets/back.png">
         </span>
-        <span class="month-year">{{ months[selectedMonth] }} {{ selectedYear }}</span>
+        <span class="month-year">
+          {{ months[selectedMonth] }} {{ selectedYear }}
+        </span>
         <span
           class="change-month"
+          @click="next()"
         >
           <img class="forward-icon" src="@/assets/forward.png">
         </span>
@@ -69,6 +73,15 @@ export default class Calendar extends Vue {
     'Sun',
   ]
 
+  next() {
+    this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
+    this.selectedMonth = (this.selectedMonth + 1) % 12
+  }
+
+  previous() {
+    this.selectedYear = (this.selectedMonth === 0) ? this.selectedYear - 1 : this.selectedYear
+    this.selectedMonth = (this.selectedMonth === 0) ? 11 : this.selectedMonth - 1
+  }
 }
 </script>
 
