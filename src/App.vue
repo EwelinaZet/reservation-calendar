@@ -27,11 +27,11 @@ export default class App extends Vue {
 
   voice="123"
 
-  startDate="'2021-01-12'"
+  startDate="2021-01-12"
 
-  endDate="'2021-01-20'"
+  endDate="2021-01-20"
 
-  unavailableDate="['2021-01-07', '2021-01-25','2021-01-30']"
+  unavailableDate="[2021-01-07, 2021-01-25, 2021-01-30]"
 }
 </script>
 

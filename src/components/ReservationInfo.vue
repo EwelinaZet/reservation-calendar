@@ -16,7 +16,18 @@
         <button>Reserve</button>
       </div>
       <div class="data-range">
-        <input>
+        <span class="start-date">
+            <input class="start-input" v-model="startDate">
+            <img class="delete-icon" src="@/assets/delete.png">
+        </span>
+        <span class="arrow">
+            <img class="arrow-icon" src="@/assets/arrow.png">
+        </span>
+        <span class="end-date">
+            <input class="end-input" v-model="endDate">
+            <img class="delete-icon" src="@/assets/delete.png">
+        </span>
+        <span></span>
       </div>
     </div>
   </div>
@@ -83,16 +94,56 @@ export default class ReservationInfo extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid rgb(38, 224, 127);
+    border-radius: 30px;
+    height: 30px;
+    padding: 10px 15px;
+  }
+  .start-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+  }
+  .end-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    background-color:rgb(219, 253, 235);
+    color: rgb(38, 224, 127);
+    border-radius: 30px;
   }
   input {
-    display: inline-block;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    outline: none;
+    /* border-radius: 30px; */
+    width:60%
+    /* display: inline-block;
     width: 100%;
     height: 30px;
     outline: none;
     font-size: 18px;
     border: 1px solid rgb(38, 224, 127);
     border-radius: 30px;
-    padding: 10px 15px;
+    padding: 10px 15px; */
+  }
+  .end-input{
+    background-color:rgb(219, 253, 235);
+  }
+  .delete-icon {
+    width: 12px;
+  }
+  .arrow {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .arrow-icon{
+    width: 24px;
   }
   .submit-reservation {
     position: absolute;
