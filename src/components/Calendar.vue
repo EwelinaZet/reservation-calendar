@@ -7,7 +7,7 @@
         >
           <img class="back-icon" src="@/assets/back.png">
         </span>
-        <span class="month-year">{{ months[currentMonth] }} {{ currentYear }}</span>
+        <span class="month-year">{{ months[selectedMonth] }} {{ selectedYear }}</span>
         <span
           class="change-month"
         >
@@ -37,12 +37,12 @@ export default class Calendar extends Vue {
   @Prop() startDate!: string
 
   @Prop() endDate!: string
-  
-  date = new Date(this.startDate)
 
-  currentMonth: number = this.date.getMonth()
+  @Prop() date!: string
 
-  currentYear: number = this.date.getFullYear()
+  @Prop() selectedMonth!: number
+
+  @Prop() selectedYear!: number
 
   months: Array<string> = [
     'January',

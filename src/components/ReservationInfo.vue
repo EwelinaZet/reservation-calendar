@@ -27,12 +27,14 @@
             <input class="end-input" v-model="endDate">
             <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
         </span>
-        <span></span>
       </div>
       <Calendar
         :start-date="startDate"
         :end-date="endDate"
         :unavailable-date="unavailableDate"
+        :date="date"
+        :selected-month.sync="selectedMonth"
+        :selectedYear.sync="selectedYear"
       />
     </div>
   </div>
@@ -61,6 +63,18 @@ export default class ReservationInfo extends Vue {
   @Prop() startDate!: string
 
   @Prop() endDate!: string
+
+  get date() {
+    return new Date(this.startDate)
+  }
+
+  get selectedMonth() {
+    return this.date.getMonth()
+  }
+
+  get selectedYear() {
+    return this.date.getFullYear()
+  }
 }
 </script>
 
