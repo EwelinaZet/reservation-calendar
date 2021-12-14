@@ -34,6 +34,13 @@
         >
           {{ item }}
         </div>
+        <div
+          v-for="item in getNextMonthDays()"
+          :key="item"
+          class="next-date"
+        >
+          {{ item }}
+        </div>
       </div>
     </div>
   </div>
@@ -73,13 +80,13 @@ export default class Calendar extends Vue {
   ]
 
   days: Array<string> = [
+    'Sun',
     'Mon',
     'Tue',
     'Wed',
     'Thu',
     'Fri',
     'Sat',
-    'Sun',
   ]
 
   next() {
@@ -94,6 +101,11 @@ export default class Calendar extends Vue {
 
   getCurrentMonthDays() {
     return new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate()
+  }
+
+  getNextMonthDays() {
+    const lastDayIndex = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDay()
+    return 7 - lastDayIndex - 1
   }
 }
 </script>
@@ -154,5 +166,9 @@ export default class Calendar extends Vue {
     justify-content: center;
     align-items: center;
     margin-top: 5px;
+  }
+  .next-date {
+    background-color: aquamarine;
+    color:#ccd0d5
   }
 </style>
