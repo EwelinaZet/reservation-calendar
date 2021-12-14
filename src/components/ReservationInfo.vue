@@ -18,17 +18,22 @@
       <div class="data-range">
         <span class="start-date">
             <input class="start-input" v-model="startDate">
-            <img class="delete-icon" src="@/assets/delete.png">
+            <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
         </span>
         <span class="arrow">
             <img class="arrow-icon" src="@/assets/arrow.png">
         </span>
         <span class="end-date">
-            <input class="end-input" v-model="endDate">
+            <input class="end-input" v-model="endDate" @click="endDate = ''">
             <img class="delete-icon" src="@/assets/delete.png">
         </span>
         <span></span>
       </div>
+      <Calendar
+        :start-date="startDate"
+        :end-date="endDate"
+        :unavailable-date="unavailableDate"
+      />
     </div>
   </div>
 </template>
@@ -36,10 +41,12 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import Stars from './Stars.vue'
+import Calendar from './Calendar.vue'
 
 @Component({
   components: {
     Stars,
+    Calendar
   },
 })
 export default class ReservationInfo extends Vue {
@@ -84,7 +91,7 @@ export default class ReservationInfo extends Vue {
   }
   .voice {
     font-size: 12px;
-    color: gray;
+    color: #b4b7bb;
     font-weight: bold;
   }
   .stars {
@@ -119,16 +126,7 @@ export default class ReservationInfo extends Vue {
     font-size: 14px;
     height: 30px;
     outline: none;
-    /* border-radius: 30px; */
     width:60%
-    /* display: inline-block;
-    width: 100%;
-    height: 30px;
-    outline: none;
-    font-size: 18px;
-    border: 1px solid rgb(38, 224, 127);
-    border-radius: 30px;
-    padding: 10px 15px; */
   }
   .end-input{
     background-color:rgb(219, 253, 235);
