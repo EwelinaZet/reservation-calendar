@@ -24,8 +24,8 @@
             <img class="arrow-icon" src="@/assets/arrow.png">
         </span>
         <span class="end-date">
-            <input class="end-input" v-model="endDate" @click="endDate = ''">
-            <img class="delete-icon" src="@/assets/delete.png">
+            <input class="end-input" v-model="endDate">
+            <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
         </span>
         <span></span>
       </div>

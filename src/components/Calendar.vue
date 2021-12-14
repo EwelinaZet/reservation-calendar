@@ -14,6 +14,14 @@
           <img class="forward-icon" src="@/assets/forward.png">
         </span>
       </div>
+      <div class="day-name">
+        <span
+          v-for="day in days"
+          :key="day"
+        >
+          {{ day }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +37,7 @@ export default class Calendar extends Vue {
   @Prop() startDate!: string
 
   @Prop() endDate!: string
-
+  
   date = new Date(this.startDate)
 
   currentMonth: number = this.date.getMonth()
@@ -50,6 +58,17 @@ export default class Calendar extends Vue {
     'Novemer',
     'December'
   ]
+
+  days: Array<string> = [
+    'Mon',
+    'Tue',
+    'Wed',
+    'Thu',
+    'Fri',
+    'Sat',
+    'Sun',
+  ]
+
 }
 </script>
 
@@ -86,5 +105,13 @@ export default class Calendar extends Vue {
     font-size: 3rem;
     font-weight: bold;
     display: flex;
-  }  
+  }
+  .day-name{
+    margin: 20px 0;
+    color: #b4b7bb;
+    display: flex;
+  }
+  .day-name span {
+    width: calc(360px/7);
+  } 
 </style>

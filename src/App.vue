@@ -21,7 +21,7 @@ import ReservationInfo from './components/ReservationInfo.vue';
   },
 })
 export default class App extends Vue {
-  price = "298"
+  price = 298
 
   stars=3.5
 
