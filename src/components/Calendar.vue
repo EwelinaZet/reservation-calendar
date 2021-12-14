@@ -26,6 +26,15 @@
           {{ day }}
         </span>
       </div>
+      <div class="calendar-content">
+        <div
+          v-for="item in getCurrentMonthDays()"
+          :key="item"
+          class="current-date"
+        >
+          {{ item }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -82,6 +91,10 @@ export default class Calendar extends Vue {
     this.selectedYear = (this.selectedMonth === 0) ? this.selectedYear - 1 : this.selectedYear
     this.selectedMonth = (this.selectedMonth === 0) ? 11 : this.selectedMonth - 1
   }
+
+  getCurrentMonthDays() {
+    return new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate()
+  }
 }
 </script>
 
@@ -126,5 +139,20 @@ export default class Calendar extends Vue {
   }
   .day-name span {
     width: calc(360px/7);
-  } 
+  }
+  .calendar-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+  }
+  .calendar-content div {
+    font-size: 14px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+  }
 </style>
