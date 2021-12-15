@@ -58,7 +58,7 @@ export default class ReservationInfo extends Vue {
 
   @Prop() voice!: number
 
-  @Prop() unavailableDate!: string
+  @Prop() unavailableDate!: Array<string>
 
   @Prop() startDate!: string
 

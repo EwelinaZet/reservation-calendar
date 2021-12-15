@@ -31,6 +31,7 @@
           v-for="item in previewDaysArray"
           :key="item"
           class="preview-date"
+          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
         >
           {{ item }}
         </div>
@@ -38,6 +39,7 @@
           v-for="item in getCurrentMonthDays()"
           :key="item"
           class="current-date"
+          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
         >
           {{ item }}
         </div>
@@ -45,6 +47,7 @@
           v-for="item in getNextMonthDays()"
           :key="item"
           class="next-date"
+          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
         >
           {{ item }}
         </div>
@@ -59,7 +62,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component
 
 export default class Calendar extends Vue {
-  @Prop() unavailableDate!: string
+  @Prop() unavailableDate!:  Array<string>
 
   @Prop() startDate!: string
 
@@ -93,10 +96,14 @@ export default class Calendar extends Vue {
     'Wed',
     'Thu',
     'Fri',
-    'Sat',
+    'Sat'
   ]
 
   previewDaysArray: Array<number> = []
+
+  selectedDaysArray: Array<number>= []
+
+  uavailableDaysArray: Array<number>= []
 
   next(): void {
     this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
@@ -126,6 +133,33 @@ export default class Calendar extends Vue {
       this.previewDaysArray.push(prevLastDay - x + 1)
     }
     return this.previewDaysArray
+  }
+
+  selectedDays() {
+    this.selectedDaysArray = []
+    const startDay = new Date(this.startDate).getDate()
+    const endDay = new Date(this.endDate).getDate()
+    for (let i = startDay; i <= endDay; i++) {
+      this.selectedDaysArray.push(i)
+    }
+    return this.selectedDaysArray
+  }
+
+  isSelected(day:number): boolean {
+    this.selectedDays()
+    return this.selectedDaysArray.indexOf(day) !== -1
+  }
+
+  uavailableDays(){
+    for(let i = 0; i < this.unavailableDate.length; i++) {
+      this.uavailableDaysArray.push(new Date(this.unavailableDate[i]).getDate())
+    }
+    return this.uavailableDaysArray
+  }
+
+  isNotAvailable(day:number): boolean {
+    this.uavailableDays()
+    return this.uavailableDaysArray.indexOf(day) !== -1
   }
 }
 </script>
@@ -175,8 +209,7 @@ export default class Calendar extends Vue {
   .calendar-content {
     width: 100%;
     display: flex;
-    flex-wrap: wrap; 
-    justify-content: space-between; 
+    flex-wrap: wrap;
   }
   .calendar-content div {
     font-size: 14px;
@@ -188,11 +221,22 @@ export default class Calendar extends Vue {
     margin-top: 5px;
   }
   .next-date {
-    background-color: aquamarine;
     color:#ccd0d5
   }
   .preview-date {
-    background-color: aquamarine;
     color:#ccd0d5
+  }
+  .active {
+    color: rgb(38, 224, 127);
+    background-color:rgb(219, 253, 235);
+  }
+  .active:nth-child(1){
+    color: white;
+    background-color:rgb(38, 224, 127);
+  }
+  .unavailable {
+    color: rgb(38, 224, 127);
+    border: 1px solid rgb(38, 224, 127);
+    border-radius: 30px;
   }
 </style>

@@ -31,7 +31,7 @@ export default class App extends Vue {
 
   endDate="2021-01-20"
 
-  unavailableDate="[2021-01-07, 2021-01-25, 2021-01-30]"
+  unavailableDate=['2021-01-07', '2021-01-25', '2021-01-30']
 }
 </script>
 
