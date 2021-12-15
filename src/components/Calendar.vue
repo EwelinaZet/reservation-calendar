@@ -28,6 +28,13 @@
       </div>
       <div class="calendar-content">
         <div
+          v-for="item in previewDaysArray"
+          :key="item"
+          class="preview-date"
+        >
+          {{ item }}
+        </div>
+        <div
           v-for="item in getCurrentMonthDays()"
           :key="item"
           class="current-date"
@@ -89,23 +96,36 @@ export default class Calendar extends Vue {
     'Sat',
   ]
 
-  next() {
+  previewDaysArray: Array<number> = []
+
+  next(): void {
     this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
     this.selectedMonth = (this.selectedMonth + 1) % 12
   }
 
-  previous() {
+  previous(): void {
     this.selectedYear = (this.selectedMonth === 0) ? this.selectedYear - 1 : this.selectedYear
     this.selectedMonth = (this.selectedMonth === 0) ? 11 : this.selectedMonth - 1
   }
 
-  getCurrentMonthDays() {
+  getCurrentMonthDays(): number {
+    this.getPreviewMonthDays()
     return new Date(this.selectedYear, this.selectedMonth + 1, 0).getDate()
   }
 
-  getNextMonthDays() {
+  getNextMonthDays(): number {
     const lastDayIndex = new Date(this.selectedYear, this.selectedMonth + 1, 0).getDay()
     return 7 - lastDayIndex - 1
+  }
+
+    getPreviewMonthDays(): Array<number> {
+    this.previewDaysArray = []
+    const firstDayIndex = new Date(this.selectedYear, this.selectedMonth, 1).getDay()
+    const prevLastDay = new Date(this.selectedYear, this.selectedMonth, 0).getDate()
+    for (let x: number = firstDayIndex; x > 0; x--) {
+      this.previewDaysArray.push(prevLastDay - x + 1)
+    }
+    return this.previewDaysArray
   }
 }
 </script>
@@ -168,6 +188,10 @@ export default class Calendar extends Vue {
     margin-top: 5px;
   }
   .next-date {
+    background-color: aquamarine;
+    color:#ccd0d5
+  }
+  .preview-date {
     background-color: aquamarine;
     color:#ccd0d5
   }
