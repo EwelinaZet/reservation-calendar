@@ -19,14 +19,14 @@
       </div>
       <div class="data-range">
         <span class="start-date">
-            <input class="start-input" v-model="startDate">
+            <input class="start-input" v-model="startDate" @change="compareDate()">
             <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
         </span>
         <span class="arrow">
             <img class="arrow-icon" src="@/assets/arrow.png">
         </span>
         <span class="end-date">
-            <input class="end-input" v-model="endDate">
+            <input class="end-input" v-model="endDate" @change="compareDate()">
             <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
         </span>
       </div>
@@ -80,6 +80,10 @@ export default class ReservationInfo extends Vue {
 
   coutPrice(){
     return (new Date(this.endDate).getTime() - new Date(this.startDate).getTime())/(1000*60*60*24)
+  }
+
+  compareDate() {
+    if (new Date(this.startDate) > new Date(this.endDate)) alert('Invalid date!')
   }
 }
 </script>
