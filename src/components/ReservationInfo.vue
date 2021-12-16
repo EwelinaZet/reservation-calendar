@@ -3,7 +3,9 @@
     <div class="container">
       <div class="reservation-info">
         <div class="price">
-          {{ price }} zł
+          <span v-if="!!coutPrice()">
+            {{ price * coutPrice() }} zł
+          </span>
         </div>
         <div class="rating">
           <Stars
@@ -75,6 +77,10 @@ export default class ReservationInfo extends Vue {
   get selectedYear() {
     return this.date.getFullYear()
   }
+
+  coutPrice(){
+    return (new Date(this.endDate).getTime() - new Date(this.startDate).getTime())/(1000*60*60*24)
+  }
 }
 </script>
 
@@ -97,6 +103,7 @@ export default class ReservationInfo extends Vue {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    min-height: 25px;
   }
   .rating {
     display: flex;
