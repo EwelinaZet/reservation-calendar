@@ -139,7 +139,7 @@ export default class Calendar extends Vue {
     this.selectedDaysArray = []
     let startDay = new Date(this.startDate)
     let endDay = new Date(this.endDate)
-    while(startDay < endDay) {
+    while(startDay <= endDay) {
       this.selectedDaysArray.push(startDay.toLocaleDateString())
       let newDate = startDay.setDate(startDay.getDate() + 1)
       startDay = new Date(newDate)

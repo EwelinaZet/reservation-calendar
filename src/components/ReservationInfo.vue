@@ -71,6 +71,7 @@ export default class ReservationInfo extends Vue {
   }
 
   get selectedMonth() {
+    console.log('this.date.getMonth()',this.date, this.date.getMonth(), this.date.getFullYear())
     return this.date.getMonth()
   }
 
