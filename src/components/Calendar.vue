@@ -31,7 +31,7 @@
           v-for="item in previewDaysArray"
           :key="item"
           class="preview-date"
-          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
+          :class="{active: isSelected(item, -1), unavailable: isUnavailable(item, -1)}"
         >
           {{ item }}
         </div>
@@ -39,7 +39,7 @@
           v-for="item in getCurrentMonthDays()"
           :key="item"
           class="current-date"
-          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
+          :class="{active: isSelected(item, 0), unavailable: isUnavailable(item, 0)}"
         >
           {{ item }}
         </div>
@@ -47,7 +47,7 @@
           v-for="item in getNextMonthDays()"
           :key="item"
           class="next-date"
-          :class="{active: isSelected(item), unavailable: isNotAvailable(item)}"
+          :class="{active: isSelected(item, 1), unavailable: isUnavailable(item, 1)}"
         >
           {{ item }}
         </div>
@@ -62,7 +62,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 @Component
 
 export default class Calendar extends Vue {
-  @Prop() unavailableDate!:  Array<string>
+  @Prop() unavailableDate!: Array<Date>
 
   @Prop() startDate!: string
 
@@ -101,9 +101,9 @@ export default class Calendar extends Vue {
 
   previewDaysArray: Array<number> = []
 
-  selectedDaysArray: Array<number>= []
+  selectedDaysArray: Array<string> = []
 
-  uavailableDaysArray: Array<number>= []
+  uavailableDaysArray: Array<Date> = []
 
   next(): void {
     this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
@@ -125,7 +125,7 @@ export default class Calendar extends Vue {
     return 7 - lastDayIndex - 1
   }
 
-    getPreviewMonthDays(): Array<number> {
+  getPreviewMonthDays(): Array<number> {
     this.previewDaysArray = []
     const firstDayIndex = new Date(this.selectedYear, this.selectedMonth, 1).getDay()
     const prevLastDay = new Date(this.selectedYear, this.selectedMonth, 0).getDate()
@@ -134,32 +134,28 @@ export default class Calendar extends Vue {
     }
     return this.previewDaysArray
   }
-
-  selectedDays() {
+  
+  selectedDays(): Array<string> {
     this.selectedDaysArray = []
-    const startDay = new Date(this.startDate).getDate()
-    const endDay = new Date(this.endDate).getDate()
-    for (let i = startDay; i <= endDay; i++) {
-      this.selectedDaysArray.push(i)
+    let startDay = new Date(this.startDate)
+    let endDay = new Date(this.endDate)
+    while(startDay < endDay) {
+      this.selectedDaysArray.push(startDay.toLocaleDateString())
+      let newDate = startDay.setDate(startDay.getDate() + 1)
+      startDay = new Date(newDate)
     }
     return this.selectedDaysArray
   }
-
-  isSelected(day:number): boolean {
+  
+  isSelected(day:number, month:number): boolean {
     this.selectedDays()
-    return this.selectedDaysArray.indexOf(day) !== -1
+    return this.selectedDaysArray.indexOf(new Date(this.selectedYear, this.selectedMonth + month, day).toLocaleDateString()) !== -1
   }
 
-  uavailableDays(){
-    for(let i = 0; i < this.unavailableDate.length; i++) {
-      this.uavailableDaysArray.push(new Date(this.unavailableDate[i]).getDate())
-    }
-    return this.uavailableDaysArray
-  }
-
-  isNotAvailable(day:number): boolean {
-    this.uavailableDays()
-    return this.uavailableDaysArray.indexOf(day) !== -1
+  isUnavailable(day:number, month: number): boolean {
+    let calendarDay = new Date(this.selectedYear, this.selectedMonth + month, day).toLocaleDateString()
+    let arrayDays = this.unavailableDate.map(item => item.toLocaleDateString())
+    return arrayDays.indexOf(calendarDay)!== -1
   }
 }
 </script>
