@@ -87,28 +87,4 @@ describe('Calendar.vue', () => {
     wrapper.vm.getNextMonthDays();
     expect(wrapper.vm.getNextMonthDays()).toEqual(6)
   })
-
-  // describe.each([
-  //   [7, 0, ["12.01.2021", "13.01.2021", "14.01.2021"], true],
-  //   [7, -1, ["12.01.2021", "13.01.2021", "14.01.2021"], false],
-  //   [7, 1, ["12.01.2021", "13.01.2021", "14.01.2021"], false],
-  //   [12, 0, ["12.01.2021", "13.01.2021", "14.01.2021"], true],
-  // ])('#isSelected', (day, month, selectedDaysArray, expected) => {
-  //   it(`#isSelected method,`, () => {
-  //   wrapper = shallowMount(Calendar, {
-  //       propsData: {
-  //         selectedYear: 2021,
-  //         selectedMonth: 0
-  //       },
-  //       data() {
-  //         return{
-  //           selectedDaysArray,
-  //           // days: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
-  //         }
-  //       }
-  //     })
-  //   //   wrapper.vm.selectedDays();
-  //     expect(wrapper.vm.isSelected(day, month)).toBe(expected)
-  //   })
-  // })
 })
