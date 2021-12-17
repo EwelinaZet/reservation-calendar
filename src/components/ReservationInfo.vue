@@ -18,18 +18,19 @@
     </div>
     <div class="data-range">
       <span class="start-date">
-        <input class="start-input" v-model="startDate" @change="compareDate()">
+        <input class="start-input" v-model="startDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible">
         <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
       </span>
       <span class="arrow">
         <img class="arrow-icon" src="@/assets/arrow.png">
       </span>
       <span class="end-date">
-        <input class="end-input" v-model="endDate" @change="compareDate()">
+        <input class="end-input" v-model="endDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible">
         <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
       </span>
     </div>
     <Calendar
+      v-if="isCalendarVisible"
       :start-date="startDate"
       :end-date="endDate"
       :unavailable-date="unavailableDate"
@@ -63,6 +64,8 @@ export default class ReservationInfo extends Vue {
   @Prop() startDate!: string
 
   @Prop() endDate!: string
+
+  isCalendarVisible = false
 
   get date() {
     return new Date(this.startDate)
