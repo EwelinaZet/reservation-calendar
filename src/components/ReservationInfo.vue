@@ -1,44 +1,42 @@
 <template>
-  <div>
-    <div class="container">
-      <div class="reservation-info">
-        <div class="price">
-          <span v-if="!!coutPrice()">
-            {{ price * coutPrice() }} zł
-          </span>
-        </div>
-        <div class="rating">
-          <Stars
-            :stars="stars"
-          />
-          <span class="voice">{{ voice }}</span>
-        </div>
-      </div>
-      <div class="submit-reservation">
-        <button>Reserve</button>
-      </div>
-      <div class="data-range">
-        <span class="start-date">
-            <input class="start-input" v-model="startDate" @change="compareDate()">
-            <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
-        </span>
-        <span class="arrow">
-            <img class="arrow-icon" src="@/assets/arrow.png">
-        </span>
-        <span class="end-date">
-            <input class="end-input" v-model="endDate" @change="compareDate()">
-            <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
+  <div class="container">
+    <div class="reservation-info">
+      <div class="price">
+        <span v-if="!!coutPrice()">
+          {{ price * coutPrice() }} zł
         </span>
       </div>
-      <Calendar
-        :start-date="startDate"
-        :end-date="endDate"
-        :unavailable-date="unavailableDate"
-        :date="date"
-        :selected-month.sync="selectedMonth"
-        :selected-year.sync="selectedYear"
-      />
+      <div class="rating">
+        <Stars
+          :stars="stars"
+        />
+        <span class="voice">{{ voice }}</span>
+      </div>
     </div>
+    <div class="submit-reservation">
+      <button>Reserve</button>
+    </div>
+    <div class="data-range">
+      <span class="start-date">
+        <input class="start-input" v-model="startDate" @change="compareDate()">
+        <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
+      </span>
+      <span class="arrow">
+        <img class="arrow-icon" src="@/assets/arrow.png">
+      </span>
+      <span class="end-date">
+        <input class="end-input" v-model="endDate" @change="compareDate()">
+        <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
+      </span>
+    </div>
+    <Calendar
+      :start-date="startDate"
+      :end-date="endDate"
+      :unavailable-date="unavailableDate"
+      :date="date"
+      :selected-month.sync="selectedMonth"
+      :selected-year.sync="selectedYear"
+    />
   </div>
 </template>
 
@@ -91,7 +89,7 @@ export default class ReservationInfo extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .container {
-    width: 400px;
+    width: 360px;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
     padding: 20px 20px;
@@ -126,7 +124,7 @@ export default class ReservationInfo extends Vue {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgb(38, 224, 127);
+    border: 1px solid #289b38;
     border-radius: 30px;
     height: 30px;
     padding: 10px 15px;
@@ -142,8 +140,8 @@ export default class ReservationInfo extends Vue {
     align-items: center;
     justify-content: center;
     width: 40%;
-    background-color:rgb(219, 253, 235);
-    color: rgb(38, 224, 127);
+    background-color:#edf5ec;
+    color: #289b38;
     border-radius: 30px;
   }
   input {
@@ -154,7 +152,7 @@ export default class ReservationInfo extends Vue {
     width:60%
   }
   .end-input{
-    background-color:rgb(219, 253, 235);
+    background-color:#edf5ec;
   }
   .delete-icon {
     width: 12px;
@@ -177,7 +175,7 @@ export default class ReservationInfo extends Vue {
     padding: 15px 20px;
     border:none;
     border-radius: 30px;
-    background-color: rgb(38, 224, 127);
+    background-color: #289b38;
     color: white;
     font-weight: bold;
     letter-spacing: 0.2rem;

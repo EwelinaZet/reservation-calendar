@@ -168,7 +168,7 @@ export default class Calendar extends Vue {
     align-items: center;
   }
   .date-picker-content {
-    width: 360px;
+    width: 320px;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
     display: block;
@@ -209,8 +209,9 @@ export default class Calendar extends Vue {
   }
   .calendar-content div {
     font-size: 14px;
-    width: 50px;
-    height: 50px;
+    font-weight: 700;
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,16 +224,16 @@ export default class Calendar extends Vue {
     color:#ccd0d5
   }
   .active {
-    color: rgb(38, 224, 127);
-    background-color:rgb(219, 253, 235);
+    color: #289b38;
+    background-color:#edf5ec;
   }
   .active:nth-child(1){
     color: white;
-    background-color:rgb(38, 224, 127);
+    background-color:#289b38;
   }
   .unavailable {
-    color: rgb(38, 224, 127);
-    border: 1px solid rgb(38, 224, 127);
+    color: #289b38;
+    border: 2px solid #289b38;
     border-radius: 30px;
   }
 </style>
