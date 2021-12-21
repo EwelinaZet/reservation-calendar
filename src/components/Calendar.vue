@@ -33,7 +33,9 @@
           class="preview-date"
           :class="{active: isSelected(item, -1), unavailable: isUnavailable(item, -1)}"
         >
-          {{ item }}
+          <span
+            @click="selectDateRange(item, 0)"
+          >{{ item }}</span>
         </div>
         <div
           v-for="item in getCurrentMonthDays()"
@@ -41,7 +43,9 @@
           class="current-date"
           :class="{active: isSelected(item, 0), unavailable: isUnavailable(item, 0)}"
         >
-          {{ item }}
+          <span
+            @click="selectDateRange(item, 1)"
+          >{{ item }}</span>
         </div>
         <div
           v-for="item in getNextMonthDays()"
@@ -49,7 +53,9 @@
           class="next-date"
           :class="{active: isSelected(item, 1), unavailable: isUnavailable(item, 1)}"
         >
-          {{ item }}
+          <span
+            @click="selectDateRange(item, 2)"
+          >{{ item }}</span>
         </div>
       </div>
     </div>
@@ -105,6 +111,8 @@ export default class Calendar extends Vue {
 
   uavailableDaysArray: Array<Date> = []
 
+  click = 1;
+
   next(): void {
     this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
     this.selectedMonth = (this.selectedMonth + 1) % 12
@@ -156,6 +164,30 @@ export default class Calendar extends Vue {
     let calendarDay = new Date(this.selectedYear, this.selectedMonth + month, day).toLocaleDateString()
     let arrayDays = this.unavailableDate.map(item => item.toLocaleDateString())
     return arrayDays.indexOf(calendarDay)!== -1
+  }
+
+  selectDateRange(day: number, month: number): number {
+    if(this.selectedMonth === 0 && month === 0) {
+      this.selectedMonth = 11
+      month = 1
+      this.selectedYear = this.selectedYear - 1
+    }
+    if(this.selectedMonth === 11 && month === 2) {
+      this.selectedMonth = 0
+      month = 1
+      this.selectedYear = this.selectedYear + 1
+    }
+    if(this.click === 1) {
+      this.startDate = `${this.selectedYear}-${this.selectedMonth + month}-${day}`
+      this.$emit('update:startDate', this.startDate)
+      return this.click++
+    }
+    if(this.click === 2) {
+      this.endDate = `${this.selectedYear}-${this.selectedMonth + month}-${day}`
+      this.$emit('update:endDate', this.endDate)
+      return this.click--
+    }
+    return this.click
   }
 }
 </script>

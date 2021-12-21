@@ -31,8 +31,8 @@
     </div>
     <Calendar
       v-if="isCalendarVisible"
-      :start-date="startDate"
-      :end-date="endDate"
+      :start-date.sync="startDate"
+      :end-date.sync="endDate"
       :unavailable-date="unavailableDate"
       :date="date"
       :selected-month.sync="selectedMonth"
@@ -67,23 +67,23 @@ export default class ReservationInfo extends Vue {
 
   isCalendarVisible = false
 
-  get date() {
+  get date(): Date {
     return new Date(this.startDate)
   }
 
-  get selectedMonth() {
+  get selectedMonth(): number {
     return this.date.getMonth()
   }
 
-  get selectedYear() {
+  get selectedYear(): number {
     return this.date.getFullYear()
   }
 
-  coutPrice(){
-    return (new Date(this.endDate).getTime() - new Date(this.startDate).getTime())/(1000*60*60*24)
+  coutPrice(): number{
+    return ((new Date(this.endDate).getTime() - new Date(this.startDate).getTime())/(1000*60*60*24)) + 1
   }
 
-  compareDate() {
+  compareDate(): void {
     if (new Date(this.startDate) > new Date(this.endDate)) alert('Invalid date!')
   }
 }
