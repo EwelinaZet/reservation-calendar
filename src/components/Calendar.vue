@@ -31,7 +31,7 @@
           v-for="item in previewDaysArray"
           :key="item"
           class="preview-date"
-          :class="{active: isSelected(item, -1), unavailable: isUnavailable(item, -1)}"
+          :class="{active: isSelected(item, -1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, -1)}"
         >
           <span
             @click="selectDateRange(item, 0)"
@@ -41,7 +41,7 @@
           v-for="item in getCurrentMonthDays()"
           :key="item"
           class="current-date"
-          :class="{active: isSelected(item, 0), unavailable: isUnavailable(item, 0)}"
+          :class="{active: isSelected(item, 0), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 0)}"
         >
           <span
             @click="selectDateRange(item, 1)"
@@ -51,7 +51,7 @@
           v-for="item in getNextMonthDays()"
           :key="item"
           class="next-date"
-          :class="{active: isSelected(item, 1), unavailable: isUnavailable(item, 1)}"
+          :class="{active: isSelected(item, 1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 1)}"
         >
           <span
             @click="selectDateRange(item, 2)"
@@ -113,6 +113,10 @@ export default class Calendar extends Vue {
 
   click = 1;
 
+  firstDayInRange = false
+
+  lastDayInRange = false
+
   next(): void {
     this.selectedYear = (this.selectedMonth === 11) ? this.selectedYear + 1 : this.selectedYear
     this.selectedMonth = (this.selectedMonth + 1) % 12
@@ -157,7 +161,16 @@ export default class Calendar extends Vue {
   
   isSelected(day:number, month:number): boolean {
     this.selectedDays()
+    this.firstLast(day, month)
     return this.selectedDaysArray.indexOf(new Date(this.selectedYear, this.selectedMonth + month, day).toLocaleDateString()) !== -1
+  }
+
+  firstLast(day:number, month:number):boolean {
+    const date = new Date(this.selectedYear, this.selectedMonth + month, day).toLocaleDateString()
+    const lastIndex = this.selectedDaysArray.length - 1
+    this.firstDayInRange = this.selectedDaysArray[0] === date
+    this.lastDayInRange = this.selectedDaysArray[lastIndex] === date
+    return this.firstDayInRange, this.lastDayInRange
   }
 
   isUnavailable(day:number, month: number): boolean {
@@ -203,12 +216,13 @@ export default class Calendar extends Vue {
     width: 320px;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.15) 0 5px 15px 0;
+    background-color: white;
     display: block;
     justify-content: center;
     align-items: center;
     padding: 20px;
     position: absolute;
-    top: 200px
+    top: 150px
   }
   .date-label{
     font-size: 16px;
@@ -259,13 +273,40 @@ export default class Calendar extends Vue {
     color: #289b38;
     background-color:#edf5ec;
   }
-  .active:nth-child(1){
+  .activeFirst{
+    background: linear-gradient(to left, #edf5ec 50%, white 50%);
+  }
+  .activeFirst span{
     color: white;
     background-color:#289b38;
-  }
-  .unavailable {
-    color: #289b38;
-    border: 2px solid #289b38;
     border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .activeLast{
+    background: linear-gradient(to right, #edf5ec 50%, white 50%);
+  }
+  .activeLast span{
+    color: white;
+    background-color:#289b38;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .unavailable span{
+    color: #289b38;
+    border: 3px solid #289b38;
+    border-radius: 30px;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
