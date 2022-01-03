@@ -11,7 +11,6 @@ describe('ReservationInfo.vue', () => {
         startDate: '2021-01-12'
        }
     })
-    console.log(wrapper.vm.coutPrice())
     expect(wrapper.vm.coutPrice()).toEqual(9)
   })
 })
