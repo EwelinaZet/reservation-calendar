@@ -2,21 +2,21 @@
   <div class="date-picker-container">
     <div class="date-picker-content">
       <div class="date-label">
-        <span
+        <button
           class="change-month"
           @click="previous()"
         >
           <img class="back-icon" src="@/assets/back.png">
-        </span>
+        </button>
         <span class="month-year">
           {{ months[selectedMonth] }} {{ selectedYear }}
         </span>
-        <span
+        <button
           class="change-month"
           @click="next()"
         >
           <img class="forward-icon" src="@/assets/forward.png">
-        </span>
+        </button>
       </div>
       <div class="day-name">
         <span
@@ -239,6 +239,8 @@ export default class Calendar extends Vue {
     font-size: 3rem;
     font-weight: bold;
     display: flex;
+    border: none;
+    background: none;
   }
   .day-name{
     margin: 20px 0;
