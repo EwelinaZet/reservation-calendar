@@ -20,6 +20,7 @@
       </div>
       <div class="day-name">
         <span
+          class="day"
           v-for="day in days"
           :key="day"
         >
@@ -227,7 +228,7 @@ export default class Calendar extends Vue {
     position: absolute;
     top: 150px
   }
-  .date-label{
+  .date-label {
     font-size: 16px;
     font-weight: bold;
     border: 1px solid #ccd0d5;
@@ -238,19 +239,19 @@ export default class Calendar extends Vue {
     justify-content: space-between;
     align-items: center;
   }
-  .change-month{
+  .change-month {
     font-size: 3rem;
     font-weight: bold;
     display: flex;
     border: none;
     background: none;
   }
-  .day-name{
+  .day-name {
     margin: 20px 0;
     color: #b4b7bb;
     display: flex;
   }
-  .day-name span {
+  .day-name .day {
     width: calc(360px/7);
   }
   .calendar-content {
@@ -258,7 +259,7 @@ export default class Calendar extends Vue {
     display: flex;
     flex-wrap: wrap;
   }
-  .calendar-content div {
+  .calendar-content .next-date, .preview-date, .current-date {
     font-size: 14px;
     font-weight: 700;
     width: 45px;
@@ -287,10 +288,10 @@ export default class Calendar extends Vue {
     color: #289b38;
     background-color:#edf5ec;
   }
-  .activeFirst{
+  .activeFirst {
     background: linear-gradient(to left, #edf5ec 50%, white 50%);
   }
-  .activeFirst button{
+  .activeFirst .item-date{
     color: white;
     background-color:#289b38;
     border-radius: 30px;
@@ -300,10 +301,10 @@ export default class Calendar extends Vue {
     justify-content: center;
     align-items: center;
   }
-  .activeLast{
+  .activeLast {
     background: linear-gradient(to right, #edf5ec 50%, white 50%);
   }
-  .activeLast button{
+  .activeLast .item-date {
     color: white;
     background-color:#289b38;
     border-radius: 30px;
@@ -313,7 +314,7 @@ export default class Calendar extends Vue {
     justify-content: center;
     align-items: center;
   }
-  .unavailable span{
+  .unavailable .item-date {
     color: #289b38;
     border: 3px solid #289b38;
     border-radius: 30px;
