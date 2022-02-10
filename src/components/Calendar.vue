@@ -33,9 +33,10 @@
           class="preview-date"
           :class="{active: isSelected(item, -1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, -1)}"
         >
-          <span
+          <button
+            class="item-date"
             @click="selectDateRange(item, 0)"
-          >{{ item }}</span>
+          >{{ item }}</button>
         </div>
         <div
           v-for="(item, i) in getCurrentMonthDays()"
@@ -43,9 +44,10 @@
           class="current-date"
           :class="{active: isSelected(item, 0), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 0)}"
         >
-          <span
+          <button
+            class="item-date"
             @click="selectDateRange(item, 1)"
-          >{{ item }}</span>
+          >{{ item }}</button>
         </div>
         <div
           v-for="(item, i) in getNextMonthDays()"
@@ -53,9 +55,10 @@
           class="next-date"
           :class="{active: isSelected(item, 1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 1)}"
         >
-          <span
+          <button
+            class="item-date"
             @click="selectDateRange(item, 2)"
-          >{{ item }}</span>
+          >{{ item }}</button>
         </div>
       </div>
     </div>
@@ -271,6 +274,15 @@ export default class Calendar extends Vue {
   .preview-date {
     color:#ccd0d5
   }
+  .item-date {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
   .active {
     color: #289b38;
     background-color:#edf5ec;
@@ -278,7 +290,7 @@ export default class Calendar extends Vue {
   .activeFirst{
     background: linear-gradient(to left, #edf5ec 50%, white 50%);
   }
-  .activeFirst span{
+  .activeFirst button{
     color: white;
     background-color:#289b38;
     border-radius: 30px;
@@ -291,7 +303,7 @@ export default class Calendar extends Vue {
   .activeLast{
     background: linear-gradient(to right, #edf5ec 50%, white 50%);
   }
-  .activeLast span{
+  .activeLast button{
     color: white;
     background-color:#289b38;
     border-radius: 30px;
