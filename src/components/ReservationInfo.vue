@@ -18,14 +18,14 @@
     </div>
     <div class="data-range">
       <span class="start-date">
-        <input class="start-input" v-model="startDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible">
+        <input class="start-input" v-model="startDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible" readonly>
         <img class="delete-icon" src="@/assets/delete.png" @click="startDate = ''">
       </span>
       <span class="arrow">
         <img class="arrow-icon" src="@/assets/arrow.png">
       </span>
       <span class="end-date">
-        <input class="end-input" v-model="endDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible">
+        <input class="end-input" v-model="endDate" @change="compareDate()" @click="isCalendarVisible = !isCalendarVisible" readonly>
         <img class="delete-icon" src="@/assets/delete.png" @click="endDate = ''">
       </span>
     </div>
