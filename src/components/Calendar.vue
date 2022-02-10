@@ -28,8 +28,8 @@
       </div>
       <div class="calendar-content">
         <div
-          v-for="item in previewDaysArray"
-          :key="item"
+          v-for="(item, i) in previewDaysArray"
+          :key="'preview' + i"
           class="preview-date"
           :class="{active: isSelected(item, -1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, -1)}"
         >
@@ -38,8 +38,8 @@
           >{{ item }}</span>
         </div>
         <div
-          v-for="item in getCurrentMonthDays()"
-          :key="item"
+          v-for="(item, i) in getCurrentMonthDays()"
+          :key="'current' + i"
           class="current-date"
           :class="{active: isSelected(item, 0), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 0)}"
         >
@@ -48,8 +48,8 @@
           >{{ item }}</span>
         </div>
         <div
-          v-for="item in getNextMonthDays()"
-          :key="item"
+          v-for="(item, i) in getNextMonthDays()"
+          :key="'next' + i"
           class="next-date"
           :class="{active: isSelected(item, 1), activeFirst: firstDayInRange, activeLast: lastDayInRange, unavailable: isUnavailable(item, 1)}"
         >
